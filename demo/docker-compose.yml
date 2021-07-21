@@ -10,8 +10,6 @@ services:
       - "GOOGLE_CLIENT_IDS=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}"
   mongodb:
     image: "bitnami/mongodb:4.4.3"
-    ports:
-      - "27017:27017"
     logging:
       driver: "none"
     volumes:
