@@ -14,7 +14,7 @@ import { OAuth2Client } from "google-auth-library"
 import { createHttpTerminator } from "http-terminator"
 import Koa from "koa"
 import websocket from "koa-easy-ws"
-import { MongoClient } from "mongodb"
+import { Collection, MongoClient } from "mongodb"
 import mongodbUri from "mongodb-uri"
 import { String } from "runtypes"
 import WebSocket from "ws"
@@ -27,11 +27,11 @@ const router = new Router<Record<string, unknown>, { ws: () => Promise<WebSocket
 const audience = process.env.GOOGLE_CLIENT_IDS?.split(",").map((s) => s.trim()) ?? []
 const googleClient = audience.length > 0 && new OAuth2Client()
 
-const { database } = mongodbUri.parse(MONGODB)
+const { username, database } = mongodbUri.parse(MONGODB)
 const client = MongoClient.connect(MONGODB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  authMechanism: "SCRAM-SHA-1",
+  ...(username && { authMechanism: "SCRAM-SHA-1" }),
 })
 const _collection = client.then((client) => client.db(database).collection(MONGODB_COLLECTION))
 
@@ -121,7 +121,7 @@ const app = new Koa({ proxy: true })
   .use(router.routes())
   .use(router.allowedMethods())
 
-_collection.then(async (collection) => {
+_collection.then(async (collection: Collection) => {
   console.log(STATUS)
   const s = app.listen(process.env.ET_PORT ? parseInt(process.env.ET_PORT) : 8888)
   collection.createIndex({ origin: 1, browserID: 1, tabID: 1, timestamp: 1 })

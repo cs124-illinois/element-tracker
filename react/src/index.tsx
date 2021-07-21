@@ -32,7 +32,7 @@ export interface ElementTrackerServerProps {
 export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
   server,
   googleToken,
-  elementSelector = "h1,h2,h3,h4,h5,h6,[data-et]",
+  elementSelector = "[data-et]",
   reportInterval = 1000,
   children,
 }) => {
