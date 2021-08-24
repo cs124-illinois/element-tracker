@@ -52,7 +52,7 @@ router.get("/", async (ctx) => {
     tabID,
   })
 
-  const ws = PongWS(await ctx.ws())
+  const ws = PongWS(await ctx.ws(), { interval: 32000, timeout: 8000 })
   const collection = await _collection
   await collection.insertOne(ConnectionSave.check({ type: "connected", ...connectionLocation, timestamp: new Date() }))
 

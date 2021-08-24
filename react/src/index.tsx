@@ -61,7 +61,8 @@ export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
       tabID: tabID,
     })
     connection.current = PingWS(
-      new ReconnectingWebSocket(`${server}?${queryString.stringify(connectionQuery)}`, [], { startClosed: true })
+      new ReconnectingWebSocket(`${server}?${queryString.stringify(connectionQuery)}`, [], { startClosed: true }),
+      { interval: 32000, timeout: 8000 }
     )
     connection.current.reconnect()
     return (): void => {
