@@ -1,6 +1,6 @@
 {
   "name": "@cs124/element-tracker",
-  "version": "2021.7.2",
+  "version": "2021.8.0",
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@cs124/client-id": "^2021.7.2",
-    "@cs124/element-tracker-types": "^2021.7.0",
+    "@cs124/element-tracker-types": "^2021.8.0",
     "@cs125/pingpongws": "^2021.7.0",
     "intersection-observer": "^0.12.0",
     "public-ip": "^4.0.4",
@@ -28,14 +28,14 @@
     "react": ">=17"
   },
   "devDependencies": {
-    "@types/node": "^16.4.0",
+    "@types/node": "^16.7.1",
     "@types/prop-types": "15.7.4",
-    "@types/react": "17.0.14",
+    "@types/react": "17.0.19",
     "@types/throttle-debounce": "2.1.0",
     "@types/uuid": "8.3.1",
-    "@typescript-eslint/eslint-plugin": "4.28.4",
-    "@typescript-eslint/parser": "4.28.4",
-    "eslint": "7.31.0",
+    "@typescript-eslint/eslint-plugin": "4.29.3",
+    "@typescript-eslint/parser": "4.29.3",
+    "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "npm-check-updates": "11.8.3",
