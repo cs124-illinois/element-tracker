@@ -124,14 +124,16 @@ const app = new Koa({ proxy: true })
 _collection.then(async (collection: Collection) => {
   console.log(STATUS)
   const s = app.listen(process.env.ET_PORT ? parseInt(process.env.ET_PORT) : 8888)
-  collection.createIndex({ origin: 1, browserID: 1, tabID: 1, timestamp: 1 })
+  // collection.createIndex({ origin: 1, browserID: 1, tabID: 1, timestamp: 1 })
   const terminator = createHttpTerminator({ server: s })
   process.on("SIGTERM", async () => {
     client.then((c) => c.close())
     await terminator.terminate()
+    process.exit(0)
   })
 })
 
 process.on("uncaughtException", (err) => {
   console.error(err)
+  process.exit(-1)
 })
