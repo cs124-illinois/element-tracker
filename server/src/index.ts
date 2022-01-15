@@ -31,7 +31,7 @@ const { database } = mongodbUri.parse(MONGODB)
 const client = MongoClient.connect(MONGODB)
 const _collection = client.then((client) => client.db(database).collection(MONGODB_COLLECTION))
 
-const STATUS = { what: "personable", started: new Date() }
+const STATUS = { what: "element-tracker", started: new Date() }
 
 router.get("/", async (ctx) => {
   if (!ctx.ws) {
