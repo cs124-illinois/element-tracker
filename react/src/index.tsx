@@ -27,6 +27,7 @@ export interface ElementTrackerServerProps {
   googleToken?: string
   reportInterval?: number
   elementSelector?: string
+  loggedIn?: boolean
   children: ReactNode
 }
 export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
@@ -34,6 +35,7 @@ export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
   googleToken,
   elementSelector = "[data-et]",
   reportInterval = 1000,
+  loggedIn,
   children,
 }) => {
   const [browserID, setBrowserID] = useState<string | undefined>()
@@ -69,7 +71,7 @@ export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
       connection.current?.close()
       connection.current = undefined
     }
-  }, [server, browserID, tabID])
+  }, [server, browserID, tabID, loggedIn])
 
   useEffect(() => {
     if (!googleToken) {

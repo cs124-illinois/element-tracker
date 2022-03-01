@@ -10,8 +10,10 @@ import {
 import { filterPingPongMessages, PongWS } from "@cs125/pingpongws"
 import cors from "@koa/cors"
 import Router from "@koa/router"
+import hkdf from "@panva/hkdf"
 import { OAuth2Client } from "google-auth-library"
 import { createHttpTerminator } from "http-terminator"
+import { jwtDecrypt } from "jose"
 import Koa from "koa"
 import websocket from "koa-easy-ws"
 import { MongoClient } from "mongodb"
@@ -33,6 +35,31 @@ const _collection = client.then((client) => client.db(database).collection(MONGO
 
 const STATUS = { what: "element-tracker", started: new Date() }
 
+const ENCRYPTION_KEY =
+  process.env.SECRET && hkdf("sha256", process.env.SECRET, "", "NextAuth.js Generated Encryption Key", 32)
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const decryptToken = async (ctx: Koa.Context): Promise<string | undefined> => {
+  const encryptionKey = await ENCRYPTION_KEY
+  if (encryptionKey === undefined || ctx.email) {
+    return
+  }
+  const cookieName = process.env.SECURE_COOKIE ? "__Secure-next-auth.session-token" : "next-auth.session-token"
+  const token = ctx.cookies.get(cookieName)
+  if (token) {
+    try {
+      const encryptionKey = await ENCRYPTION_KEY
+      const {
+        payload: { email },
+      } = await jwtDecrypt(token, encryptionKey as Uint8Array, { clockTolerance: 15 })
+      return email as string
+    } catch (err) {
+      //
+    }
+  }
+  return
+}
+
 router.get("/", async (ctx) => {
   if (!ctx.ws) {
     ctx.body = STATUS
@@ -50,9 +77,12 @@ router.get("/", async (ctx) => {
 
   const ws = PongWS(await ctx.ws(), { interval: 32000, timeout: 8000 })
   const collection = await _collection
-  await collection.insertOne(ConnectionSave.check({ type: "connected", ...connectionLocation, timestamp: new Date() }))
 
-  let email: string | undefined
+  let email = await decryptToken(ctx)
+  await collection.insertOne(
+    ConnectionSave.check({ type: "connected", ...connectionLocation, timestamp: new Date(), ...(email && { email }) })
+  )
+
   ws.addEventListener(
     "message",
     filterPingPongMessages(async ({ data }) => {
