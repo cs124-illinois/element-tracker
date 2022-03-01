@@ -28,6 +28,7 @@ export interface ElementTrackerServerProps {
   reportInterval?: number
   elementSelector?: string
   loggedIn?: boolean
+  shouldConnect?: boolean
   children: ReactNode
 }
 export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
@@ -36,6 +37,7 @@ export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
   elementSelector = "[data-et]",
   reportInterval = 1000,
   loggedIn,
+  shouldConnect,
   children,
 }) => {
   const [browserID, setBrowserID] = useState<string | undefined>()
@@ -54,7 +56,7 @@ export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
 
   useEffect(() => {
     connection.current?.close()
-    if (!server || !browserID || !tabID) {
+    if (!server || !browserID || !tabID || shouldConnect === false) {
       connection.current = undefined
       return
     }
@@ -71,7 +73,7 @@ export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
       connection.current?.close()
       connection.current = undefined
     }
-  }, [server, browserID, tabID, loggedIn])
+  }, [server, browserID, tabID, loggedIn, shouldConnect])
 
   useEffect(() => {
     if (!googleToken) {
