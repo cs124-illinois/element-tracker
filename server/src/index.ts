@@ -33,7 +33,7 @@ const { database } = mongodbUri.parse(MONGODB)
 const client = MongoClient.connect(MONGODB)
 const _collection = client.then((client) => client.db(database).collection(MONGODB_COLLECTION))
 
-const STATUS = { what: "element-tracker", started: new Date() }
+const STATUS = { what: "element-tracker", started: new Date(), heartbeat: undefined as unknown as Date }
 
 const ENCRYPTION_KEY =
   process.env.SECRET && hkdf("sha256", process.env.SECRET, "", "NextAuth.js Generated Encryption Key", 32)
@@ -83,11 +83,13 @@ router.get("/", async (ctx) => {
     ConnectionSave.check({ type: "connected", ...connectionLocation, timestamp: new Date(), ...(email && { email }) })
   )
 
+  STATUS.heartbeat = new Date()
   ws.addEventListener(
     "message",
     filterPingPongMessages(async ({ data }) => {
       const message = JSON.parse(data.toString())
       if (UpdateMessage.guard(message)) {
+        STATUS.heartbeat = new Date()
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const savedUpdate = UpdateSave.check({
           ...connectionLocation,
@@ -97,6 +99,7 @@ router.get("/", async (ctx) => {
         })
         await collection.insertOne(savedUpdate)
       } else if (LoginMessage.guard(message)) {
+        STATUS.heartbeat = new Date()
         if (googleClient) {
           const { googleToken: idToken } = message
           try {
