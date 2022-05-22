@@ -61,6 +61,14 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@cs124/client-id@2022.5.0":
+  version "2022.5.0"
+  resolved "https://registry.yarnpkg.com/@cs124/client-id/-/client-id-2022.5.0.tgz#53ee672a063871cecbcc69f0b08da92397609f63"
+  integrity sha512-soDPlzEQRFZwv2VccgN/X9c4sbPCduh2rMozoOxReZ0UXYjk/WtSjxcXv0TgRQXg3XVX2aOF2mWdRltfxquRCQ==
+  dependencies:
+    public-ip "5.0.0"
+    uuid "8.3.2"
+
 "@cs124/client-id@^2021.7.2":
   version "2021.7.2"
   resolved "https://registry.yarnpkg.com/@cs124/client-id/-/client-id-2021.7.2.tgz#ce239f4c0efc4f55611497b104d463b78441078e"
@@ -94,7 +102,7 @@
   resolved "https://registry.yarnpkg.com/@cs124/react-google-login/-/react-google-login-2021.7.0.tgz#5c324abfb0987fa132e8bb4aa7031dd9a003e439"
   integrity sha512-fc+zNAVSzSWTOeHe84+mqV/8ZK9gxHSxlz7IlO5E1fu3wJohjDfQpbNO0ND9qcH7kuGO5h8U7utb0WRsJKsYqg==
 
-"@cs125/pingpongws@^2021.7.0":
+"@cs125/pingpongws@2021.7.0", "@cs125/pingpongws@^2021.7.0":
   version "2021.7.0"
   resolved "https://registry.yarnpkg.com/@cs125/pingpongws/-/pingpongws-2021.7.0.tgz#207d04b3c042db32c7d4543fa4c791d8ec18f714"
   integrity sha512-KZE1gI7FalMNnsa6ntvr+AG9ddT8bpao3yl8joQY6+hi2buXKNgRqeXO8QPwQW9BsHb7+vK4Ulm3IYIVXZjSiQ==
@@ -3522,7 +3530,7 @@ internal-slot@^1.0.3:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-intersection-observer@^0.12.0:
+intersection-observer@0.12.0, intersection-observer@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.12.0.tgz#6c84628f67ce8698e5f9ccf857d97718745837aa"
   integrity sha512-2Vkz8z46Dv401zTWudDGwO7KiGHNDkMv417T5ItcNYfmvHR/1qCTVBO9vwH8zZmQ0WkA/1ARwpysR9bsnop4NQ==
@@ -5414,6 +5422,15 @@ public-encrypt@^4.0.0:
     randombytes "^2.0.1"
     safe-buffer "^5.1.2"
 
+public-ip@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/public-ip/-/public-ip-5.0.0.tgz#b392fcc88552c3b36933a286068948816515f92a"
+  integrity sha512-xaH3pZMni/R2BG7ZXXaWS9Wc9wFlhyDVJF47IJ+3ali0TGv+2PsckKxbmo+rnx3ZxiV2wblVhtdS3bohAP6GGw==
+  dependencies:
+    dns-socket "^4.2.2"
+    got "^12.0.0"
+    is-ip "^3.1.0"
+
 public-ip@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/public-ip/-/public-ip-4.0.4.tgz#b3784a5a1ff1b81d015b9a18450be65ffd929eb3"
@@ -5421,15 +5438,6 @@ public-ip@^4.0.4:
   dependencies:
     dns-socket "^4.2.2"
     got "^9.6.0"
-    is-ip "^3.1.0"
-
-public-ip@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/public-ip/-/public-ip-5.0.0.tgz#b392fcc88552c3b36933a286068948816515f92a"
-  integrity sha512-xaH3pZMni/R2BG7ZXXaWS9Wc9wFlhyDVJF47IJ+3ali0TGv+2PsckKxbmo+rnx3ZxiV2wblVhtdS3bohAP6GGw==
-  dependencies:
-    dns-socket "^4.2.2"
-    got "^12.0.0"
     is-ip "^3.1.0"
 
 pump@^3.0.0:
@@ -5462,20 +5470,20 @@ pupa@^2.1.1:
   dependencies:
     escape-goat "^2.0.0"
 
-query-string@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.0.1.tgz#45bd149cf586aaa582dffc7ec7a8ad97dd02f75d"
-  integrity sha512-uIw3iRvHnk9to1blJCG3BTc+Ro56CBowJXKmNNAm3RulvPBzWLRqKSiiDk+IplJhsydwtuNMHi8UGQFcCLVfkA==
+query-string@7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.1.1.tgz#754620669db978625a90f635f12617c271a088e1"
+  integrity sha512-MplouLRDHBZSG9z7fpuAAcI7aAYjDLhtsiVZsevsfaHWDS2IDdORKbSd1kWUA+V4zyva/HZoSfpwnYMMQDhb0w==
   dependencies:
     decode-uri-component "^0.2.0"
     filter-obj "^1.1.0"
     split-on-first "^1.0.0"
     strict-uri-encode "^2.0.0"
 
-query-string@^7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.1.1.tgz#754620669db978625a90f635f12617c271a088e1"
-  integrity sha512-MplouLRDHBZSG9z7fpuAAcI7aAYjDLhtsiVZsevsfaHWDS2IDdORKbSd1kWUA+V4zyva/HZoSfpwnYMMQDhb0w==
+query-string@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.0.1.tgz#45bd149cf586aaa582dffc7ec7a8ad97dd02f75d"
+  integrity sha512-uIw3iRvHnk9to1blJCG3BTc+Ro56CBowJXKmNNAm3RulvPBzWLRqKSiiDk+IplJhsydwtuNMHi8UGQFcCLVfkA==
   dependencies:
     decode-uri-component "^0.2.0"
     filter-obj "^1.1.0"
@@ -5670,7 +5678,7 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-reconnecting-websocket@^4.4.0:
+reconnecting-websocket@4.4.0, reconnecting-websocket@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/reconnecting-websocket/-/reconnecting-websocket-4.4.0.tgz#3b0e5b96ef119e78a03135865b8bb0af1b948783"
   integrity sha512-D2E33ceRPga0NvTDhJmphEgJ7FUYF0v4lr1ki0csq06OdlxKfugGzN0dSkxM/NfqCxYELK4KcaTOUOjTV6Dcng==
@@ -6364,7 +6372,7 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-throttle-debounce@^3.0.1:
+throttle-debounce@3.0.1, throttle-debounce@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-3.0.1.tgz#32f94d84dfa894f786c9a1f290e7a645b6a19abb"
   integrity sha512-dTEWWNu6JmeVXY0ZYoPuH5cRIwc0MeGbJwah9KUNYSJwommQpCzTySTpEe8Gs1J23aeWEuAobe4Ag7EHVt/LOg==
@@ -6674,7 +6682,7 @@ util@^0.12.0:
     safe-buffer "^5.1.2"
     which-typed-array "^1.1.2"
 
-uuid@^8.3.2:
+uuid@8.3.2, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
