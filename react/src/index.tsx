@@ -1,6 +1,6 @@
 import { useClientID } from "@cs124/client-id"
 import { ConnectionQuery, ElementTree, LoginMessage, UpdateMessage } from "@cs124/element-tracker-types"
-import { PingWS } from "@cs125/pingpongws"
+import { PingWS } from "@cs124/pingpongws-client"
 import "intersection-observer"
 import queryString from "query-string"
 import React, { createContext, ReactNode, useCallback, useContext, useEffect, useRef, useState } from "react"
@@ -67,9 +67,9 @@ export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
     })
     connection.current = PingWS(
       new ReconnectingWebSocket(`${server}?${queryString.stringify(connectionQuery)}`, [], { startClosed: true }),
-      { interval: 32000, timeout: 8000 }
+      { interval: 32 * 1024, timeout: 16 * 1024, useOtherMessages: true }
     )
-    connection.current.reconnect()
+    connection.current?.reconnect()
     return (): void => {
       connection.current?.close()
       connection.current = undefined

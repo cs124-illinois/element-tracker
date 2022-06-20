@@ -1,0 +1,6 @@
+#!/bin/sh
+if [[ -z "${SOURCE_MAPS}" ]]; then
+  node index.js
+else
+  node --enable-source-maps index.js
+fi

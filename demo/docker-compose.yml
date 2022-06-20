@@ -9,7 +9,7 @@ services:
       - "MONGODB=mongodb://mongodb:27017/jeed_demo"
       - "GOOGLE_CLIENT_IDS=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}"
   mongodb:
-    image: "bitnami/mongodb:4.4.3"
+    image: "bitnami/mongodb:4.4.8"
     logging:
       driver: "none"
     volumes:

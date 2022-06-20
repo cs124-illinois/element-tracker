@@ -1,4 +1,12 @@
-FROM node:14.17.3-alpine
+FROM node:16.15-alpine
+
+RUN apk add --no-cache tini
+
+WORKDIR /server
+COPY dist .
+COPY container/run run
+
+ENTRYPOINT ["/sbin/tini", "--"]
 
 ARG VERSION
 ENV VERSION=$VERSION
@@ -7,7 +15,5 @@ ENV GIT_COMMIT=$GIT_COMMIT
 ARG BUILD_DATE
 ENV BUILD_DATE=$BUILD_DATE
 
-COPY dist/index.js .
-COPY dist/index.js.map .
 
-CMD [ "node", "--enable-source-maps", "index.js"]
+CMD ["/server/run"]

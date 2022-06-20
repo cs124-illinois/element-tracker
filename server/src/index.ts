@@ -7,7 +7,7 @@ import {
   UpdateMessage,
   UpdateSave,
 } from "@cs124/element-tracker-types"
-import { filterPingPongMessages, PongWS } from "@cs125/pingpongws"
+import { filterPingPongMessages, PongWS } from "@cs124/pingpongws-server"
 import cors from "@koa/cors"
 import Router from "@koa/router"
 import hkdf from "@panva/hkdf"
@@ -75,10 +75,17 @@ router.get("/", async (ctx) => {
     tabID,
   })
 
-  const ws = PongWS(await ctx.ws(), { interval: 32000, timeout: 8000 })
+  let email = await decryptToken(ctx)
+
+  const ws = PongWS(await ctx.ws(), {
+    logDisconnects: true,
+    logIdentifier: () => email || tabID,
+    useOtherMessages: true,
+    interval: 32 * 1024,
+    timeout: 16 * 1024,
+  })
   const collection = await _collection
 
-  let email = await decryptToken(ctx)
   await collection.insertOne(
     ConnectionSave.check({ type: "connected", ...connectionLocation, timestamp: new Date(), ...(email && { email }) })
   )
