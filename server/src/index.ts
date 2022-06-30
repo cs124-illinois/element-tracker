@@ -137,6 +137,7 @@ router.get("/", async (ctx) => {
       ConnectionSave.check({ type: "disconnected", ...connectionLocation, timestamp: new Date() })
     )
   })
+  ws.on("error", console.error)
 })
 
 const validDomains = process.env.VALID_DOMAINS?.split(",").map((s) => s.trim())
