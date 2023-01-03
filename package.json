@@ -1,4 +1,7 @@
 {
-    "private": true,
-    "workspaces": ["types", "react", "server", "demo"]
+  "private": true,
+  "workspaces": ["types", "react", "server", "demo"],
+  "scripts": {
+    "backend": "docker compose up"
+  }
 }

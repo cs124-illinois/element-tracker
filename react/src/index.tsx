@@ -3,7 +3,7 @@ import { ConnectionQuery, ElementTree, LoginMessage, UpdateMessage } from "@cs12
 import { PingWS } from "@cs124/pingpongws-client"
 import "intersection-observer"
 import queryString from "query-string"
-import React, { createContext, ReactNode, useCallback, useContext, useEffect, useRef, useState } from "react"
+import React, { createContext, PropsWithChildren, useCallback, useContext, useEffect, useRef, useState } from "react"
 import ReconnectingWebSocket from "reconnecting-websocket"
 import { debounce, throttle } from "throttle-debounce"
 
@@ -29,9 +29,8 @@ export interface ElementTrackerServerProps {
   elementSelector?: string
   loggedIn?: boolean
   shouldConnect?: boolean
-  children: ReactNode
 }
-export const ElementTrackerServer: React.FC<ElementTrackerServerProps> = ({
+export const ElementTrackerServer: React.FC<PropsWithChildren & ElementTrackerServerProps> = ({
   server,
   googleToken,
   elementSelector = "[data-et]",
