@@ -2,6 +2,7 @@
   "private": true,
   "workspaces": ["types", "react", "server", "demo"],
   "scripts": {
+    "db": "mongosh",
     "backend": "docker compose up"
   }
 }

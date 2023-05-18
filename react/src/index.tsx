@@ -3,7 +3,7 @@ import { ConnectionQuery, ElementTree, LoginMessage, UpdateMessage } from "@cs12
 import { PingWS } from "@cs124/pingpongws-client"
 import "intersection-observer"
 import queryString from "query-string"
-import React, { createContext, PropsWithChildren, useCallback, useContext, useEffect, useRef, useState } from "react"
+import React, { PropsWithChildren, createContext, useCallback, useContext, useEffect, useRef, useState } from "react"
 import ReconnectingWebSocket from "reconnecting-websocket"
 import { debounce, throttle } from "throttle-debounce"
 
@@ -311,7 +311,7 @@ export const UpdateHash: React.FC<UpdateHashProps> = ({ filter = (): boolean => 
   const setHash = useCallback((newHash: string) => {
     if (hash.current !== newHash) {
       hash.current = newHash
-      window.history.replaceState({}, "", newHash)
+      window.history.replaceState({ ...window.history.state, as: newHash, url: newHash }, "", newHash)
     }
   }, [])
 

@@ -7,15 +7,15 @@ import {
   UpdateMessage,
   UpdateSave,
 } from "@cs124/element-tracker-types"
-import { filterPingPongMessages, PongWS } from "@cs124/pingpongws-server"
+import { PongWS, filterPingPongMessages } from "@cs124/pingpongws-server"
 import cors from "@koa/cors"
 import Router from "@koa/router"
 import hkdf from "@panva/hkdf"
 import { OAuth2Client } from "google-auth-library"
-import { createHttpTerminator } from "http-terminator"
 import { jwtDecrypt } from "jose"
 import Koa from "koa"
 import websocket from "koa-easy-ws"
+import log4js from "log4js"
 import { MongoClient } from "mongodb"
 import mongodbUri from "mongodb-uri"
 import { String } from "runtypes"
@@ -34,6 +34,8 @@ const client = MongoClient.connect(MONGODB)
 const _collection = client.then((client) => client.db(database).collection(MONGODB_COLLECTION))
 
 const STATUS = { what: "element-tracker", started: new Date(), heartbeat: undefined as unknown as Date }
+
+export const logger = log4js.getLogger()
 
 const ENCRYPTION_KEY =
   process.env.SECRET && hkdf("sha256", process.env.SECRET, "", "NextAuth.js Generated Encryption Key", 32)
@@ -60,7 +62,7 @@ const decryptToken = async (ctx: Koa.Context): Promise<string | undefined> => {
   return
 }
 
-router.get("/", async (ctx) => {
+router.get("/", async (ctx: Koa.Context) => {
   if (!ctx.ws) {
     ctx.body = STATUS
     return
@@ -159,14 +161,12 @@ const app = new Koa({ proxy: true })
   .use(router.allowedMethods())
 
 _collection.then(async () => {
-  console.log(STATUS)
-  const s = app.listen(process.env.ET_PORT ? parseInt(process.env.ET_PORT) : 8888)
-  const terminator = createHttpTerminator({ server: s })
-  process.on("SIGTERM", async () => {
-    client.then((c) => c.close())
-    await terminator.terminate()
-    process.exit(0)
-  })
+  logger.level = process.env.DEVELOPMENT ? "DEBUG" : "INFO"
+  logger.info(STATUS)
+
+  const server = app.listen(process.env.ET_PORT ? parseInt(process.env.ET_PORT) : 8888)
+  server.requestTimeout = 0
+  server.headersTimeout = 0
 })
 
 process.on("uncaughtException", (err) => {
