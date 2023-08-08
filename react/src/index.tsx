@@ -66,7 +66,7 @@ export const ElementTrackerServer: React.FC<PropsWithChildren & ElementTrackerSe
     })
     connection.current = PingWS(
       new ReconnectingWebSocket(`${server}?${queryString.stringify(connectionQuery)}`, [], { startClosed: true }),
-      { interval: 32 * 1024, timeout: 16 * 1024, useOtherMessages: true }
+      { interval: 32 * 1024, timeout: 16 * 1024, useOtherMessages: true },
     )
     connection.current?.reconnect()
     return (): void => {
@@ -120,15 +120,15 @@ export const ElementTrackerServer: React.FC<PropsWithChildren & ElementTrackerSe
       })
       connection.current?.send(JSON.stringify(update))
     }),
-    [reportInterval, browserID, tabID]
+    [reportInterval, browserID, tabID],
   )
 
   const getElements = useCallback(
     () =>
       (Array.from(document.querySelectorAll(elementSelector)) || []).filter(
-        (e) => (e.getAttribute("data-et-id") || e.id).length > 0
+        (e) => (e.getAttribute("data-et-id") || e.id).length > 0,
       ),
-    [elementSelector]
+    [elementSelector],
   )
 
   return (
@@ -259,7 +259,7 @@ export function atBottom(): boolean {
     document.body.offsetHeight,
     document.documentElement.offsetHeight,
     document.body.clientHeight,
-    document.documentElement.clientHeight
+    document.documentElement.clientHeight,
   )
   return (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight === documentHeight
 }
@@ -329,7 +329,7 @@ export const UpdateHash: React.FC<UpdateHashProps> = ({ filter = (): boolean => 
       elements &&
       active(
         elements.filter((c) => filter(c)),
-        top
+        top,
       )
     if (!activeHash) {
       setHash(" ")

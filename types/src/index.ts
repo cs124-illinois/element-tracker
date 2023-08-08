@@ -22,7 +22,7 @@ export const ConnectionSave = Union(
   Record({
     type: Union(Literal("connected"), Literal("disconnected")),
     timestamp: InstanceOf(Date),
-  })
+  }),
 )
 export type ConnectionSave = Static<typeof ConnectionSave>
 
@@ -36,14 +36,14 @@ export const UpdateMessage = Record({
       top: Number,
       bottom: Number,
       tagName: String,
-    }).And(Partial({ id: String, text: String }))
+    }).And(Partial({ id: String, text: String })),
   ),
 }).And(
   Partial({
     visible: Boolean,
     IPv4: String,
     IPv6: String,
-  })
+  }),
 )
 export type UpdateMessage = Static<typeof UpdateMessage>
 
@@ -55,7 +55,7 @@ export const UpdateSave = Union(
   }),
   Partial({
     email: String,
-  })
+  }),
 )
 export type UpdateSave = Static<typeof UpdateSave>
 
@@ -71,6 +71,6 @@ export const LoginSave = Union(
     type: Literal("login"),
     timestamp: InstanceOf(Date),
     email: String,
-  })
+  }),
 )
 export type LoginSave = Static<typeof LoginSave>

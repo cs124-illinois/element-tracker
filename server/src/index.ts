@@ -89,7 +89,7 @@ router.get("/", async (ctx: Koa.Context) => {
   const collection = await _collection
 
   await collection.insertOne(
-    ConnectionSave.check({ type: "connected", ...connectionLocation, timestamp: new Date(), ...(email && { email }) })
+    ConnectionSave.check({ type: "connected", ...connectionLocation, timestamp: new Date(), ...(email && { email }) }),
   )
 
   STATUS.heartbeat = new Date()
@@ -132,11 +132,11 @@ router.get("/", async (ctx: Koa.Context) => {
       } else {
         console.error(`Bad message: ${JSON.stringify(message, null, 2)}`)
       }
-    })
+    }),
   )
   ws.addEventListener("close", async () => {
     await collection.insertOne(
-      ConnectionSave.check({ type: "disconnected", ...connectionLocation, timestamp: new Date() })
+      ConnectionSave.check({ type: "disconnected", ...connectionLocation, timestamp: new Date() }),
     )
   })
   ws.on("error", console.error)
@@ -154,7 +154,7 @@ const app = new Koa({ proxy: true })
         }
       },
       maxAge: 86400,
-    })
+    }),
   )
   .use(websocket())
   .use(router.routes())
