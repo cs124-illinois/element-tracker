@@ -253,15 +253,7 @@ export const elementListToTree = (elements: Element[]): ElementTree[] => {
 
 export const atTop = (): boolean => (document.documentElement.scrollTop || document.body.scrollTop) === 0
 export function atBottom(): boolean {
-  const documentHeight = Math.max(
-    document.body.scrollHeight,
-    document.documentElement.scrollHeight,
-    document.body.offsetHeight,
-    document.documentElement.offsetHeight,
-    document.body.clientHeight,
-    document.documentElement.clientHeight,
-  )
-  return (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight === documentHeight
+  return window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2
 }
 
 export function active<T extends Element>(elements: Array<T>, windowTop = 0): T | undefined {

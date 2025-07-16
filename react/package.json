@@ -1,7 +1,8 @@
 {
   "name": "@cs124/element-tracker",
-  "version": "2023.8.1",
+  "version": "2024.8.0",
   "license": "MIT",
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -17,32 +18,32 @@
   },
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@cs124/client-id": "2023.5.0",
-    "@cs124/element-tracker-types": "2023.8.0",
+    "@cs124/client-id": "2024.8.0",
+    "@cs124/element-tracker-types": "2024.8.0",
     "@cs124/pingpongws-client": "2023.8.0",
     "intersection-observer": "0.12.2",
     "query-string": "7.1.3",
-    "reconnecting-websocket": "cs124-illinois/reconnecting-websocket#2023.8.0",
-    "throttle-debounce": "5.0.0"
+    "reconnecting-websocket": "cs124-illinois/reconnecting-websocket#2024.8.0",
+    "throttle-debounce": "5.0.2"
   },
   "peerDependencies": {
     "react": "16.x || 18.x"
   },
   "devDependencies": {
-    "@types/react": "18.2.19",
-    "@types/throttle-debounce": "5.0.0",
-    "@typescript-eslint/eslint-plugin": "6.3.0",
-    "@typescript-eslint/parser": "6.3.0",
-    "depcheck": "1.4.3",
-    "eslint": "8.46.0",
-    "eslint-config-prettier": "9.0.0",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "npm-check-updates": "16.10.18",
-    "prettier": "3.0.1",
+    "@eslint/js": "9.9.0",
+    "@types/react": "18.3.4",
+    "@types/throttle-debounce": "5.0.2",
+    "depcheck": "1.4.7",
+    "eslint": "9.9.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-react-hooks": "4.6.2",
+    "npm-check-updates": "17.1.0",
+    "prettier": "3.3.3",
     "prettier-package-json": "2.8.0",
-    "prettier-plugin-organize-imports": "3.2.3",
-    "react": "18.2.0",
-    "rimraf": "5.0.1",
-    "typescript": "5.1.6"
+    "prettier-plugin-organize-imports": "4.0.0",
+    "react": "18.3.1",
+    "rimraf": "6.0.1",
+    "typescript": "5.5.4",
+    "typescript-eslint": "8.2.0"
   }
 }
