@@ -41,8 +41,8 @@ export const ElementTrackerServer: React.FC<PropsWithChildren & ElementTrackerSe
 }) => {
   const [browserID, setBrowserID] = useState<string | undefined>()
   const [tabID, setTabID] = useState<string | undefined>()
-  const IPv4 = useRef<string | undefined>()
-  const IPv6 = useRef<string | undefined>()
+  const IPv4 = useRef<string | undefined>(undefined)
+  const IPv6 = useRef<string | undefined>(undefined)
   const clientID = useClientID()
 
   useEffect(() => {

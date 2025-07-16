@@ -18,22 +18,22 @@
   },
   "types": "dist/index.d.ts",
   "peerDependencies": {
-    "runtypes": ">= 6"
+    "runtypes": ">= 7"
   },
   "devDependencies": {
-    "@eslint/js": "9.9.0",
-    "@typescript-eslint/eslint-plugin": "8.2.0",
-    "@typescript-eslint/parser": "8.2.0",
+    "@eslint/js": "9.31.0",
+    "@typescript-eslint/eslint-plugin": "8.37.0",
+    "@typescript-eslint/parser": "8.37.0",
     "depcheck": "1.4.7",
-    "eslint": "9.9.0",
-    "eslint-config-prettier": "9.1.0",
-    "npm-check-updates": "17.1.0",
-    "prettier": "3.3.3",
+    "eslint": "9.31.0",
+    "eslint-config-prettier": "10.1.5",
+    "npm-check-updates": "18.0.1",
+    "prettier": "3.6.2",
     "prettier-package-json": "2.8.0",
-    "prettier-plugin-organize-imports": "4.0.0",
+    "prettier-plugin-organize-imports": "4.1.0",
     "rimraf": "6.0.1",
-    "runtypes": "6.7.0",
-    "typescript": "5.5.4",
-    "typescript-eslint": "8.2.0"
+    "runtypes": "7.0.4",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.37.0"
   }
 }

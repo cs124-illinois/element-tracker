@@ -40,7 +40,6 @@ export const logger = log4js.getLogger()
 const ENCRYPTION_KEY =
   process.env.SECRET && hkdf("sha256", process.env.SECRET, "", "NextAuth.js Generated Encryption Key", 32)
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const decryptToken = async (ctx: Koa.Context): Promise<string | undefined> => {
   const encryptionKey = await ENCRYPTION_KEY
   if (encryptionKey === undefined || ctx.email) {
@@ -81,7 +80,7 @@ router.get("/", async (ctx: Koa.Context) => {
 
   const ws = PongWS(await ctx.ws(), {
     logDisconnects: true,
-    logIdentifier: () => email || tabID,
+    logIdentifier: () => email || tabID || "unknown",
     useOtherMessages: true,
     interval: 32 * 1024,
     timeout: 16 * 1024,
@@ -99,7 +98,6 @@ router.get("/", async (ctx: Koa.Context) => {
       const message = JSON.parse(data.toString())
       if (UpdateMessage.guard(message)) {
         STATUS.heartbeat = new Date()
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const savedUpdate = UpdateSave.check({
           ...connectionLocation,
           ...message,
@@ -110,7 +108,7 @@ router.get("/", async (ctx: Koa.Context) => {
       } else if (LoginMessage.guard(message)) {
         STATUS.heartbeat = new Date()
         if (googleClient) {
-          const { googleToken: idToken } = message
+          const { googleToken: idToken } = message as { googleToken: string }
           try {
             email = (
               await googleClient.verifyIdToken({
