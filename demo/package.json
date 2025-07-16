@@ -11,8 +11,8 @@
     "backend": "docker-compose --env-file .env.development up"
   },
   "dependencies": {
-    "@cs124/client-id": "2025.1.0",
-    "@cs124/element-tracker": "2024.8.0",
+    "@cs124/client-id": "2025.7.0",
+    "@cs124/element-tracker": "2025.7.0",
     "next": "15.4.1",
     "react": "19.1.0",
     "react-dom": "19.1.0"

@@ -1,6 +1,6 @@
 {
   "name": "@cs124/element-tracker-types",
-  "version": "2024.8.0",
+  "version": "2025.7.0",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",

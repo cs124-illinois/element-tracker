@@ -1,6 +1,6 @@
 {
   "name": "@cs124/element-tracker",
-  "version": "2024.8.0",
+  "version": "2025.7.0",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
@@ -19,7 +19,7 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@cs124/client-id": "2025.7.0",
-    "@cs124/element-tracker-types": "2024.8.0",
+    "@cs124/element-tracker-types": "2025.7.0",
     "@cs124/pingpongws-client": "2025.7.0",
     "intersection-observer": "0.12.2",
     "query-string": "9.2.2",
