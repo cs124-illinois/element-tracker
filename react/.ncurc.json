@@ -1,0 +1,3 @@
+{
+  "reject": ["public-ip", "query-string"]
+}

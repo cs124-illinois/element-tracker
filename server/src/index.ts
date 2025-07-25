@@ -54,8 +54,8 @@ const decryptToken = async (ctx: Koa.Context): Promise<string | undefined> => {
         payload: { email },
       } = await jwtDecrypt(token, encryptionKey as Uint8Array, { clockTolerance: 15 })
       return email as string
-    } catch (err) {
-      //
+    } catch {
+      // Ignore decryption errors
     }
   }
   return
@@ -80,7 +80,7 @@ router.get("/", async (ctx: Koa.Context) => {
 
   const ws = PongWS(await ctx.ws(), {
     logDisconnects: true,
-    logIdentifier: () => email || tabID || "unknown",
+    logIdentifier: () => email || tabID,
     useOtherMessages: true,
     interval: 32 * 1024,
     timeout: 16 * 1024,
@@ -108,7 +108,7 @@ router.get("/", async (ctx: Koa.Context) => {
       } else if (LoginMessage.guard(message)) {
         STATUS.heartbeat = new Date()
         if (googleClient) {
-          const { googleToken: idToken } = message as { googleToken: string }
+          const { googleToken: idToken } = message
           try {
             email = (
               await googleClient.verifyIdToken({
@@ -125,7 +125,9 @@ router.get("/", async (ctx: Koa.Context) => {
               timestamp: new Date(),
             })
             await collection.insertOne(savedLogin)
-          } catch (err) {}
+          } catch {
+            // Ignore token validation errors
+          }
         }
       } else {
         console.error(`Bad message: ${JSON.stringify(message, null, 2)}`)

@@ -3,6 +3,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "target": "esnext",
+    "module": "esnext",
     "lib": ["es6"],
     "moduleResolution": "node",
     "strict": true,

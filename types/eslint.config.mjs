@@ -1,15 +1,21 @@
-// @ts-check
-
 import eslint from "@eslint/js"
 import eslintConfigPrettier from "eslint-config-prettier"
 import tseslint from "typescript-eslint"
 
 export default [
-  ...tseslint.config(eslint.configs.recommended, ...tseslint.configs.recommended, {
-    rules: {
-      "@typescript-eslint/no-namespace": "off",
-      "no-empty": "off",
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: "module",
+      },
     },
-  }),
+  },
   eslintConfigPrettier,
+  {
+    ignores: ["dist/**"],
+  },
 ]

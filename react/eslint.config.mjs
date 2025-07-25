@@ -1,22 +1,28 @@
-// @ts-check
-
 import eslint from "@eslint/js"
 import eslintConfigPrettier from "eslint-config-prettier"
-import hooksPlugin from "eslint-plugin-react-hooks"
+import reactHooks from "eslint-plugin-react-hooks"
 import tseslint from "typescript-eslint"
 
 export default [
-  ...tseslint.config(eslint.configs.recommended, ...tseslint.configs.recommended, {
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: "module",
+      },
+    },
     plugins: {
-      "react-hooks": hooksPlugin,
+      "react-hooks": reactHooks,
     },
-    // @ts-expect-error seems to work
     rules: {
-      "@typescript-eslint/no-namespace": "off",
-      "no-empty": "off",
-      "@typescript-eslint/no-unused-expressions": [2, { allowShortCircuit: true, allowTernary: true }],
-      ...hooksPlugin.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
     },
-  }),
+  },
   eslintConfigPrettier,
+  {
+    ignores: ["dist/**"],
+  },
 ]

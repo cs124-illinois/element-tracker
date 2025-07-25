@@ -253,7 +253,15 @@ export const elementListToTree = (elements: Element[]): ElementTree[] => {
 
 export const atTop = (): boolean => (document.documentElement.scrollTop || document.body.scrollTop) === 0
 export function atBottom(): boolean {
-  return window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2
+  const documentHeight = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.body.clientHeight,
+    document.documentElement.clientHeight,
+  )
+  return (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight === documentHeight
 }
 
 export function active<T extends Element>(elements: Array<T>, windowTop = 0): T | undefined {
@@ -328,7 +336,9 @@ export const UpdateHash: React.FC<UpdateHashProps> = ({ filter = (): boolean => 
       return
     }
     const id = activeHash.getAttribute("data-et-id") || activeHash.id
-    id && setHash(`#${id}`)
+    if (id) {
+      setHash(`#${id}`)
+    }
   }, [filter, elements, top, setHash])
 
   useEffect(() => {

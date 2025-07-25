@@ -1,28 +1,28 @@
-// @ts-check
-
 import eslint from "@eslint/js"
 import eslintConfigPrettier from "eslint-config-prettier"
-import eslintPluginPrettier from "eslint-plugin-prettier"
+import prettierPlugin from "eslint-plugin-prettier"
 import tseslint from "typescript-eslint"
 
 export default [
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
   {
-    ignores: ["dist/**"],
-  },
-  ...tseslint.config(eslint.configs.recommended, ...tseslint.configs.recommended, {
-    rules: {
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unused-vars": "off",
-      "no-empty": "off",
+    files: ["**/*.ts", "**/*.tsx"],
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: "module",
+      },
     },
-  }),
+    plugins: {
+      prettier: prettierPlugin,
+    },
+    rules: {
+      ...prettierPlugin.configs.recommended.rules,
+    },
+  },
   eslintConfigPrettier,
   {
-    plugins: {
-      prettier: eslintPluginPrettier,
-    },
-    rules: {
-      "prettier/prettier": "error",
-    },
+    ignores: ["dist/**"],
   },
 ]
