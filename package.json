@@ -2,6 +2,7 @@
   "private": true,
   "workspaces": ["types", "react", "server", "demo"],
   "scripts": {
+    "build": "npm run build --workspaces",
     "db": "mongosh",
     "backend": "docker compose up"
   }

@@ -4,7 +4,7 @@
   "version": "2025.7.1",
   "scripts": {
     "build": "rimraf dist && esbuild src/index.ts --log-level=error --sourcemap --bundle --platform=node --outfile=dist/index.js",
-    "checker": "npm run depcheck && npm run prettier && npm run eslint && npm run tsc",
+    "check": "npm run depcheck && npm run prettier && npm run eslint && npm run tsc",
     "clean": "rimraf dist",
     "depcheck": "depcheck --ignore-dirs=dist --ignores=prettier-plugin-*,env-cmd,ts-node,rimraf",
     "docker:build": "npm run build && docker build . -t cs124/element-tracker:latest && npm run docker:tag",

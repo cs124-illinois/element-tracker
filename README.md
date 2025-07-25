@@ -34,10 +34,10 @@ git clone https://github.com/your-org/element-tracker.git
 cd element-tracker
 
 # Install dependencies
-yarn install
+npm install
 
 # Build all packages
-yarn workspaces foreach run build
+npm run build --workspaces
 ```
 
 ## Quick Start
@@ -45,7 +45,7 @@ yarn workspaces foreach run build
 ### 1. Start MongoDB
 
 ```bash
-yarn backend
+npm run backend
 # or
 docker-compose up
 ```
@@ -65,14 +65,14 @@ SECRET=your-encryption-secret
 
 ```bash
 cd server
-yarn start
+npm start
 ```
 
 ### 4. Run the Demo
 
 ```bash
 cd demo
-yarn start
+npm start
 ```
 
 ## Usage
@@ -147,29 +147,29 @@ The server exposes a WebSocket endpoint at `/` that accepts:
 
 ```bash
 # Type checking
-yarn tsc
+npm run tsc
 
 # Linting
-yarn eslint
+npm run eslint
 
 # Code formatting
-yarn prettier
+npm run prettier
 
 # Run all checks
-yarn checker
+npm run check
 
 # Update dependencies
-yarn ncu
+npm run ncu
 ```
 
 ### Building
 
 ```bash
 # Build all packages
-yarn workspaces foreach run build
+npm run build --workspaces
 
 # Build specific package
-cd types && yarn build
+cd types && npm run build
 ```
 
 ### Testing
@@ -178,7 +178,7 @@ Run the demo application to test the tracking functionality:
 
 ```bash
 cd demo
-yarn start
+npm start
 ```
 
 ## Configuration
@@ -221,10 +221,10 @@ yarn start
 ```bash
 # Build server image
 cd server
-yarn docker:build
+npm run docker:build
 
 # Push to registry
-yarn docker:push
+npm run docker:push
 ```
 
 ### Docker Compose
@@ -270,5 +270,5 @@ MIT
 Please ensure all checks pass before submitting:
 
 ```bash
-yarn checker
+npm run checker
 ```

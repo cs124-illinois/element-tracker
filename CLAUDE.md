@@ -16,44 +16,44 @@ This is a TypeScript monorepo for element tracking functionality with four main 
 ### Building and Type Checking
 ```bash
 # Build all packages
-yarn workspaces foreach run build
+npm run build --workspaces
 
 # Type check specific packages
-cd react && yarn tsc
-cd server && yarn tsc
-cd types && yarn tsc
+cd react && npm run tsc
+cd server && npm run tsc
+cd types && npm run tsc
 ```
 
 ### Code Quality
 ```bash
-# Run full checker (includes depcheck, prettier, eslint, tsc, build)
-cd react && yarn checker
-cd server && yarn checker  
-cd types && yarn checker
+# Run full check (includes depcheck, prettier, eslint, tsc, build)
+cd react && npm run check
+cd server && npm run check  
+cd types && npm run check
 
 # Individual tools
-cd react && yarn eslint
-cd react && yarn prettier
+cd react && npm run eslint
+cd react && npm run prettier
 ```
 
 ### Development Servers
 ```bash
 # Start demo application
-cd demo && yarn start
+cd demo && npm start
 
 # Start backend server with Docker
-yarn backend
+npm run backend
 # or from demo directory:
-cd demo && yarn backend
+cd demo && npm run backend
 
 # Start server in development mode
-cd server && yarn start
+cd server && npm start
 ```
 
 ### Database
 ```bash
 # Connect to MongoDB shell
-yarn db
+npm run db
 ```
 
 ## Architecture
